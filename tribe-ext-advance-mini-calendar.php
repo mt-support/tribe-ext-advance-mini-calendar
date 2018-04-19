@@ -36,8 +36,9 @@ class Tribe_Advance_Minical {
 	 */
 	public function __construct( $target_date = false ) {
 
-		if ( is_admin() )
+		if ( is_admin() ) {
 			return;
+		}
 
 		$this->target_date = $target_date;
 
@@ -51,17 +52,20 @@ class Tribe_Advance_Minical {
 	 */
 	public function set_target_date() {
 
-		if ( ! is_string($this->target_date) || 1 !== preg_match( '#^\d{4}-\d{2}(-\d{2})?$# ', $this->target_date ) )
+		if ( ! is_string($this->target_date) || 1 !== preg_match( '#^\d{4}-\d{2}(-\d{2})?$# ', $this->target_date ) ) {
 			$this->target_date = $this->next_upcoming_date();
+		}
 	}
 
 	public function advance_minical( $instance, $widget ) {
 
-		if ( 'tribe-mini-calendar' !== $widget->id_base || isset( $instance['eventDate'] ) )
+		if ( 'tribe-mini-calendar' !== $widget->id_base || isset( $instance['eventDate'] ) ) {
 			return $instance;
+		}
 
-		if ( date( 'Y-m' ) === $this->target_date )
+		if ( date( 'Y-m' ) === $this->target_date ) {
 			return $instance;
+		}
 
 		add_action( 'tribe_before_get_template_part', array( $this, 'modify_list_query' ), 5 );
 
@@ -72,8 +76,9 @@ class Tribe_Advance_Minical {
 
 	public function modify_list_query( $template ) {
 
-		if ( false === strpos( $template, 'mini-calendar/list.php' ) )
+		if ( false === strpos( $template, 'mini-calendar/list.php' ) ) {
 			return;
+		}
 
 		add_action( 'parse_query', array( $this, 'amend_list_query' ) );
 	}
