@@ -19,6 +19,6 @@ Install and activate like any other plugin!
 
 ### Changelog
 
-#### 1.0 — 2018-04-19
+#### 1.0 — 2018-04-20
 
 * Initial release.
